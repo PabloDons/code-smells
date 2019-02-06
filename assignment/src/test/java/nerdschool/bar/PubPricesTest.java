@@ -21,31 +21,31 @@ public class PubPricesTest {
 
     @Test
     public void oneBeerTest() {
-        int actualPrice = pub.computeCost(Pub.ONE_BEER, false, 1);
+        int actualPrice = pub.computeCost(Pub.BEER_HANSA, false, 1);
         assertEquals(74, actualPrice);
     }
 
     @Test
     public void testStudentsGetADiscountForBeer() throws Exception {
-        int actualPrice = pub.computeCost(Pub.ONE_BEER, true, 1);
+        int actualPrice = pub.computeCost(Pub.BEER_HANSA, true, 1);
         assertEquals(67, actualPrice);
     }
 
     @Test
     public void testCidersAreCostly() throws Exception {
-        int actualPrice = pub.computeCost(Pub.ONE_CIDER, false, 1);
+        int actualPrice = pub.computeCost(Pub.CIDER_GRANS, false, 1);
         assertEquals(103, actualPrice);
     }
 
     @Test
     public void testProperCidersAreEvenMoreExpensive() throws Exception {
-        int actualPrice = pub.computeCost(Pub.A_PROPER_CIDER, false, 1);
+        int actualPrice = pub.computeCost(Pub.CIDER_STRONGBOW, false, 1);
         assertEquals(110, actualPrice);
     }
 
     @Test
     public void testACocktail() throws Exception {
-        int actualPrice = pub.computeCost(Pub.GT, false, 1);
+        int actualPrice = pub.computeCost(Pub.DRINK_GT, false, 1);
         assertEquals(115, actualPrice);
     }
 
@@ -58,13 +58,13 @@ public class PubPricesTest {
 
     @Test
     public void testStudentsDoNotGetDiscountsForCocktails() throws Exception {
-        int actualPrice = pub.computeCost(Pub.GT, true, 1);
+        int actualPrice = pub.computeCost(Pub.DRINK_GT, true, 1);
         assertEquals(115, actualPrice);
     }
 
     @Test
     public void testBacardiSpecial() throws Exception {
-        int actualPrice = pub.computeCost(Pub.BACARDI_SPECIAL, false, 1);
+        int actualPrice = pub.computeCost(Pub.DRINK_BACARDI, false, 1);
         assertEquals(127, actualPrice);
     }
 
@@ -72,17 +72,17 @@ public class PubPricesTest {
     public void testCanBuyAtMostTwoDrinksInOneGo() throws Exception {
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("Too many");
-        pub.computeCost(Pub.BACARDI_SPECIAL, false, 3);
+        pub.computeCost(Pub.DRINK_BACARDI, false, 3);
     }
 
     @Test
     public void testStudentsGetDiscountsWhenOrderingMoreThanOneBeer() throws Exception {
-        int actualPrice = pub.computeCost(Pub.ONE_BEER, true, 2);
+        int actualPrice = pub.computeCost(Pub.BEER_HANSA, true, 2);
         assertEquals(67*2, actualPrice);
     }
 
     @Test
     public void testCanOrderMoreThanTwoBeers() throws Exception {
-        pub.computeCost(Pub.ONE_BEER, false, 5);
+        pub.computeCost(Pub.BEER_HANSA, false, 5);
     }
 }
